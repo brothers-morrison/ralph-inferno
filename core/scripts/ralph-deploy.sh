@@ -40,7 +40,7 @@ WATCH_MODE=false
 OVERNIGHT_MODE=false
 
 # ntfy topic for notifications
-NTFY_TOPIC="${NTFY_TOPIC:-ralph-notify}"
+NTFY_TOPIC="${NTFY_TOPIC:-}"
 
 if [ -z "$PROJECT_NAME" ]; then
     echo "Usage: $0 <project-name> [options]"

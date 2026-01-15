@@ -139,7 +139,7 @@ CHECKSUM_DIR=".spec-checksums"  # Track completed specs
 COMPLETION_MARKER="<promise>DONE</promise>"
 
 # Notifications
-NTFY_TOPIC="${NTFY_TOPIC:-ralph-notify}"
+NTFY_TOPIC="${NTFY_TOPIC:-}"
 
 # Git
 MAIN_BRANCH="main"
@@ -1712,7 +1712,7 @@ ${YELLOW}Features:${NC}
   ✓ CLAUDE.md updates (long-term memory)
 
 ${YELLOW}Environment:${NC}
-  NTFY_TOPIC    ntfy topic (default: ralph-notify)
+  NTFY_TOPIC    ntfy topic (optional, no default)
 
 EOF
 }

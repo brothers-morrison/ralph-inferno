@@ -2,7 +2,7 @@
 # notify.sh - Notifications via ntfy with epic tracking
 # Source this file: source lib/notify.sh
 
-NTFY_TOPIC="${NTFY_TOPIC:-ralph-notify}"
+NTFY_TOPIC="${NTFY_TOPIC:-}"
 CURRENT_EPIC=""
 CURRENT_EPIC_NAME=""
 

@@ -189,8 +189,7 @@ fi
 
 # ntfy topic
 echo ""
-read -p "ntfy.sh topic för notifikationer [ralph-notify]: " ntfy_topic
-ntfy_topic="${ntfy_topic:-ralph-notify}"
+read -p "ntfy.sh topic för notifikationer (valfritt): " ntfy_topic
 echo "NTFY_TOPIC=$ntfy_topic" >> "$CONFIG_FILE"
 
 echo ""
