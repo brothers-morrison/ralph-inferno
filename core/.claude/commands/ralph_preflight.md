@@ -1,15 +1,15 @@
-# /ralph:preflight - Verify Requirements Before Dev
+# /ralph_preflight - Verify Requirements Before Dev
 
 Generera och verifiera preflight checklist innan development startar.
 
 ## Usage
 ```
-/ralph:preflight
-/ralph:preflight --check    # Verifiera befintlig PREFLIGHT.md
+/ralph_preflight
+/ralph_preflight --check    # Verifiera befintlig PREFLIGHT.md
 ```
 
 ## Prerequisites
-- `docs/PRD.md` måste finnas (kör `/ralph:idea` eller `/ralph:discover` först)
+- `docs/PRD.md` måste finnas (kör `/ralph_idea` eller `/ralph_discover` först)
 
 ## Instructions
 
@@ -84,8 +84,8 @@ Om användaren svarar "ja":
 docs/PREFLIGHT.md uppdaterad med STATUS: READY FOR DEV
 
 Nästa steg:
-  /ralph:plan    - Skapa specs
-  /ralph:deploy  - Starta bygget
+  /ralph_plan    - Skapa specs
+  /ralph_deploy  - Starta bygget
 ```
 
 Om användaren svarar "nej":
@@ -95,10 +95,10 @@ Om användaren svarar "nej":
 Vänligen slutför följande innan du fortsätter:
 {lista saknade items}
 
-Kör /ralph:preflight --check när du är klar.
+Kör /ralph_preflight --check när du är klar.
 ```
 
 **VIKTIGT:**
 - STOPPA INTE om preflight inte är klar
 - Användaren måste aktivt bekräfta
-- `/ralph:deploy` ska vägra köra om PREFLIGHT inte är READY
+- `/ralph_deploy` ska vägra köra om PREFLIGHT inte är READY

@@ -1,12 +1,12 @@
-# /ralph:discover - Interactive Requirements Discovery
+# /ralph_discover - Interactive Requirements Discovery
 
 Start an interactive discovery session to create a PRD and set up the project.
 
 ## Usage
 ```
-/ralph:discover [project-name]
-/ralph:discover my-app
-/ralph:discover my-app --input meeting-notes.md
+/ralph_discover [project-name]
+/ralph_discover my-app
+/ralph_discover my-app --input meeting-notes.md
 ```
 
 ## CRITICAL INSTRUCTIONS
@@ -326,9 +326,9 @@ SECRETS HANDLING:
   - docs/prd.md - Product Requirements Document
   - CLAUDE.md - Project instructions
 - List next steps:
-  1. `/ralph:plan` - Create implementation plan from PRD
-  2. `/ralph:deploy` - Send to VM and run autonomously
-  3. `/ralph:review` - Review results when done
+  1. `/ralph_plan` - Create implementation plan from PRD
+  2. `/ralph_deploy` - Send to VM and run autonomously
+  3. `/ralph_review` - Review results when done
 
 ---
 

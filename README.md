@@ -30,17 +30,17 @@ Local Machine                      VM (Sandbox)
 │ Claude Code     │               │ Claude Code     │
 │ + Ralph commands│    GitHub     │ + ralph.sh      │
 │                 │ ────────────► │                 │
-│ /ralph:discover │               │ Runs specs      │
-│ /ralph:plan     │               │ autonomously    │
-│ /ralph:deploy   │               │                 │
+│ /ralph_discover │               │ Runs specs      │
+│ /ralph_plan     │               │ autonomously    │
+│ /ralph_deploy   │               │                 │
 └─────────────────┘               └─────────────────┘
 ```
 
 **The flow:**
-1. You work locally with Claude Code, using `/ralph:discover` and `/ralph:plan`
-2. `/ralph:deploy` pushes your specs to GitHub and starts Ralph on the VM
+1. You work locally with Claude Code, using `/ralph_discover` and `/ralph_plan`
+2. `/ralph_deploy` pushes your specs to GitHub and starts Ralph on the VM
 3. Ralph runs autonomously on the VM while you sleep
-4. Next day: `/ralph:review` to test what was built
+4. Next day: `/ralph_review` to test what was built
 
 ## Requirements
 
@@ -66,7 +66,7 @@ Local Machine                      VM (Sandbox)
 
 ### Optional
 
-- **Claude Chrome Extension** - Lets Claude browse websites during `/ralph:discover`
+- **Claude Chrome Extension** - Lets Claude browse websites during `/ralph_discover`
 - Cloud CLI (`hcloud`, `gcloud`, `doctl`, `aws`) - For VM management
 - [ntfy.sh](https://ntfy.sh) - Push notifications when Ralph finishes
 
@@ -116,10 +116,10 @@ On your local machine, start Claude Code:
 claude
 ```
 
-Type `/ralph:` and you should see the available commands:
-- `/ralph:discover`
-- `/ralph:plan`
-- `/ralph:deploy`
+Type `/ralph_` and you should see the available commands:
+- `/ralph_discover`
+- `/ralph_plan`
+- `/ralph_deploy`
 - etc.
 
 ## Update
@@ -132,7 +132,7 @@ npx ralph-inferno update
 
 Or use the slash command in Claude Code:
 ```
-/ralph:update
+/ralph_update
 ```
 
 ## Workflow
@@ -146,21 +146,21 @@ Or use the slash command in Claude Code:
       │
       ▼
 ┌─────────────────┐
-│ /ralph:discover │  ◄── Autonomous discovery loop
+│ /ralph_discover │  ◄── Autonomous discovery loop
 │                 │      Claude explores from all angles
 │ Output: PRD.md  │      (Analyst, PM, UX, Architect, Business)
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│  /ralph:plan    │  ◄── Breaks down PRD into specs
+│  /ralph_plan    │  ◄── Breaks down PRD into specs
 │                 │
 │ Output: specs/* │      (01-setup.md, 02-auth.md, etc.)
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│  /ralph:deploy  │  ◄── Push to GitHub, start on VM
+│  /ralph_deploy  │  ◄── Push to GitHub, start on VM
 │                 │      Choose mode: Quick/Standard/Inferno
 └────────┬────────┘
          │
@@ -174,13 +174,13 @@ Or use the slash command in Claude Code:
          │
          ▼
 ┌─────────────────┐
-│  /ralph:review  │  ◄── Open tunnels, test the app
+│  /ralph_review  │  ◄── Open tunnels, test the app
 └────────┬────────┘
          │
          ▼
 ┌─────────────────────┐
-│ /ralph:change-      │  ◄── If bugs found, generate CR specs
-│ request             │      Then run /ralph:deploy again
+│ /ralph_change-      │  ◄── If bugs found, generate CR specs
+│ request             │      Then run /ralph_deploy again
 └─────────────────────┘
 ```
 
@@ -188,17 +188,17 @@ Or use the slash command in Claude Code:
 
 | Command | Description |
 |---------|-------------|
-| `/ralph:discover` | Autonomous discovery loop, creates PRD with web research |
-| `/ralph:plan` | Creates implementation plan + spec files |
-| `/ralph:deploy` | Push to GitHub, choose mode, start Ralph on VM |
-| `/ralph:review` | Open SSH tunnels, test the app |
-| `/ralph:change-request` | Document bugs, generate CR specs for fixes |
-| `/ralph:status` | Check Ralph's progress on VM |
-| `/ralph:abort` | Stop Ralph on VM |
+| `/ralph_discover` | Autonomous discovery loop, creates PRD with web research |
+| `/ralph_plan` | Creates implementation plan + spec files |
+| `/ralph_deploy` | Push to GitHub, choose mode, start Ralph on VM |
+| `/ralph_review` | Open SSH tunnels, test the app |
+| `/ralph_change-request` | Document bugs, generate CR specs for fixes |
+| `/ralph_status` | Check Ralph's progress on VM |
+| `/ralph_abort` | Stop Ralph on VM |
 
 ### Deploy Modes
 
-When running `/ralph:deploy`, you choose a mode:
+When running `/ralph_deploy`, you choose a mode:
 
 | Mode | What it does |
 |------|--------------|
@@ -210,7 +210,7 @@ When running `/ralph:deploy`, you choose a mode:
 
 **Discovery mode works best when Claude can browse the web.**
 
-Install the **Claude Chrome Extension** - it lets Claude see and interact with websites you reference during `/ralph:discover`. This enables better research of competitors, APIs, and documentation.
+Install the **Claude Chrome Extension** - it lets Claude see and interact with websites you reference during `/ralph_discover`. This enables better research of competitors, APIs, and documentation.
 
 ### Example Session
 
@@ -219,16 +219,16 @@ Install the **Claude Chrome Extension** - it lets Claude see and interact with w
 npx ralph-inferno install
 
 # 2. In Claude Code:
-/ralph:discover    # Autonomous discovery with web research
-/ralph:plan        # Generate specs from PRD
-/ralph:deploy      # Choose mode, send to VM
+/ralph_discover    # Autonomous discovery with web research
+/ralph_plan        # Generate specs from PRD
+/ralph_deploy      # Choose mode, send to VM
 
 # 3. Next morning:
-/ralph:review      # Test what Ralph built
+/ralph_review      # Test what Ralph built
 
 # 4. If bugs found:
-/ralph:change-request  # Generate fix specs
-/ralph:deploy          # Run fixes
+/ralph_change-request  # Generate fix specs
+/ralph_deploy          # Run fixes
 ```
 
 ## Safety

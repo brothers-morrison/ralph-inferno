@@ -1,11 +1,11 @@
-# /ralph:abort - Stop Ralph on VM
+# /ralph_abort - Stop Ralph on VM
 
 Stoppa Ralph gracefully på VM.
 
 ## Usage
 ```
-/ralph:abort
-/ralph:abort --force     # Kill utan att vänta
+/ralph_abort
+/ralph_abort --force     # Kill utan att vänta
 ```
 
 ## Instructions

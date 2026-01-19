@@ -1,4 +1,4 @@
-# /ralph:update - Check and update Ralph
+# /ralph_update - Check and update Ralph
 
 Check for updates and optionally update Ralph to the latest version.
 

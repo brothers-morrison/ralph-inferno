@@ -78,7 +78,7 @@ The main entry point for running Ralph on the VM.
 
 ## Deploy Mode Selection
 
-When running `/ralph:deploy`, you choose the mode:
+When running `/ralph_deploy`, you choose the mode:
 
 ```
 Vilken mode vill du köra Ralph i?
@@ -109,10 +109,10 @@ During `install`, you'll be asked:
 
 | Command | Description |
 |---------|-------------|
-| `/ralph:discover` | Autonomous discovery loop → PRD |
-| `/ralph:plan` | Break down PRD → specs |
-| `/ralph:deploy` | Push to GitHub, start on VM |
-| `/ralph:review` | Open tunnels, test the app |
-| `/ralph:change-request` | Document bugs → CR specs |
-| `/ralph:status` | Check Ralph's progress on VM |
-| `/ralph:abort` | Stop Ralph on VM |
+| `/ralph_discover` | Autonomous discovery loop → PRD |
+| `/ralph_plan` | Break down PRD → specs |
+| `/ralph_deploy` | Push to GitHub, start on VM |
+| `/ralph_review` | Open tunnels, test the app |
+| `/ralph_change-request` | Document bugs → CR specs |
+| `/ralph_status` | Check Ralph's progress on VM |
+| `/ralph_abort` | Stop Ralph on VM |

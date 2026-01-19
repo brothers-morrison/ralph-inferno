@@ -1,14 +1,14 @@
-# /ralph:plan - Create Implementation Plan
+# /ralph_plan - Create Implementation Plan
 
 Analyze PRD and create implementation plan with executable specs.
 
 ## Usage
 ```
-/ralph:plan
+/ralph_plan
 ```
 
 ## Prerequisites
-- `docs/prd.md` must exist (run `/ralph:discover` first)
+- `docs/prd.md` must exist (run `/ralph_discover` first)
 
 ## Output
 - `docs/IMPLEMENTATION_PLAN.md` - Översikt med epics och tasks
@@ -163,5 +163,5 @@ Skriv:
 ```
 PLANNING_DONE
 
-Nästa: Kör /ralph:deploy för att skicka till VM och starta bygget
+Nästa: Kör /ralph_deploy för att skicka till VM och starta bygget
 ```

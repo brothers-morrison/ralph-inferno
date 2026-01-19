@@ -1,6 +1,6 @@
 # Preflight Checklist
 
-> ⚠️ Alla checkboxar MÅSTE vara ✅ innan /ralph:deploy körs
+> ⚠️ Alla checkboxar MÅSTE vara ✅ innan /ralph_deploy körs
 > Genererad från PRD av Ralph Inferno
 
 ---
@@ -120,5 +120,5 @@ STATUS: [ ] READY FOR DEV
 
 **När allt är klart, kör:**
 ```bash
-/ralph:deploy
+/ralph_deploy
 ```

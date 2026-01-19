@@ -11,10 +11,10 @@
 │   OUTER LOOP     │    │   MIDDLE LOOP    │    │   INNER LOOP     │
 │   (Your Machine) │ →  │   (Orchestrator) │ →  │   (Per Spec)     │
 ├──────────────────┤    ├──────────────────┤    ├──────────────────┤
-│ /ralph:discover  │    │ ralph.sh         │    │ Claude runs spec │
-│ /ralph:plan      │    │ --orchestrate    │    │ npm run build    │
-│ /ralph:deploy    │    │                  │    │ playwright test  │
-│ /ralph:review    │    │ Retries specs    │    │ Auto-CR on fail  │
+│ /ralph_discover  │    │ ralph.sh         │    │ Claude runs spec │
+│ /ralph_plan      │    │ --orchestrate    │    │ npm run build    │
+│ /ralph_deploy    │    │                  │    │ playwright test  │
+│ /ralph_review    │    │ Retries specs    │    │ Auto-CR on fail  │
 │                  │    │ until all pass   │    │ Design review    │
 └──────────────────┘    └──────────────────┘    └──────────────────┘
        YOU                   VM (auto)              VM (auto)

@@ -1,10 +1,10 @@
-# /ralph:idea - Start Discovery Loop
+# /ralph_idea - Start Discovery Loop
 
 Autonom utforskning av en produktidé från alla vinklar med web research.
 
 ## Usage
 ```
-/ralph:idea "Din produktidé här"
+/ralph_idea "Din produktidé här"
 ```
 
 ## Instructions
@@ -172,6 +172,6 @@ DISCOVERY_COMPLETE
 PRD sparad till: docs/PRD.md
 
 Nästa steg:
-1. Kör /ralph:preflight för att verifiera requirements
-2. Kör /ralph:plan för att skapa implementation plan
+1. Kör /ralph_preflight för att verifiera requirements
+2. Kör /ralph_plan för att skapa implementation plan
 ```

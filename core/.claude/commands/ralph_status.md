@@ -1,12 +1,12 @@
-# /ralph:status - Check Ralph Status on VM
+# /ralph_status - Check Ralph Status on VM
 
 Visa Ralph's progress på VM utan att SSH:a manuellt.
 
 ## Usage
 ```
-/ralph:status
-/ralph:status --log      # Visa senaste log-rader
-/ralph:status --full     # Visa allt
+/ralph_status
+/ralph_status --log      # Visa senaste log-rader
+/ralph_status --full     # Visa allt
 ```
 
 ## Instructions

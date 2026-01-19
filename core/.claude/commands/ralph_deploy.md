@@ -1,12 +1,12 @@
-# /ralph:deploy - Deploy till VM via GitHub
+# /ralph_deploy - Deploy till VM via GitHub
 
 Pusha projekt till GitHub och starta Ralph på VM.
 
 ## Usage
 ```
-/ralph:deploy
-/ralph:deploy --overnight   # Stäng av VM när klar
-/ralph:deploy --skip-requirements  # Hoppa över requirements check
+/ralph_deploy
+/ralph_deploy --overnight   # Stäng av VM när klar
+/ralph_deploy --skip-requirements  # Hoppa över requirements check
 ```
 
 ## Prerequisites
@@ -29,7 +29,7 @@ echo "=== PRE-DEPLOY VALIDATION ==="
 SPEC_COUNT=$(ls -1 specs/*.md 2>/dev/null | grep -v "CR-" | wc -l | tr -d ' ')
 if [ "$SPEC_COUNT" -eq 0 ]; then
     echo "❌ FATAL: No specs found in specs/"
-    echo "   Run /ralph:plan first to generate specs"
+    echo "   Run /ralph_plan first to generate specs"
     exit 1
 fi
 echo "✅ Found $SPEC_COUNT specs"
@@ -37,7 +37,7 @@ echo "✅ Found $SPEC_COUNT specs"
 # 2. PRD bör finnas
 if [ ! -f "docs/PRD.md" ] && [ ! -f "docs/prd.md" ]; then
     echo "⚠️  WARNING: No PRD found in docs/"
-    echo "   Recommended: Run /ralph:discover first"
+    echo "   Recommended: Run /ralph_discover first"
 fi
 
 # 3. CLAUDE.md bör finnas
@@ -112,7 +112,7 @@ Kör följande:
   1. ssh $VM_USER@$VM_IP
   2. claude login
   3. Följ instruktionerna i browsern
-  4. Kör /ralph:deploy igen
+  4. Kör /ralph_deploy igen
 
 Detta behöver bara göras en gång per VM.
 ```
@@ -126,7 +126,7 @@ Kör följande:
   1. ssh $VM_USER@$VM_IP
   2. echo 'export ANTHROPIC_API_KEY="sk-ant-..."' >> ~/.bashrc
   3. source ~/.bashrc
-  4. Kör /ralph:deploy igen
+  4. Kör /ralph_deploy igen
 ```
 **STOPPA** och vänta på att användaren gör detta.
 
@@ -218,7 +218,7 @@ Följ progress:
   - ssh $VM_USER@$VM_IP 'tail -f ~/projects/REPO/ralph-deploy.log'
 
 När klar:
-  /ralph:review    # Öppna tunnlar och testa
+  /ralph_review    # Öppna tunnlar och testa
 ```
 
 **VIKTIGT:**
