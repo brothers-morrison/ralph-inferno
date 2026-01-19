@@ -21,6 +21,10 @@ TODO:
     # Run the script
     chmod +x vm_setup.py
     python3 vm_setup.py
+
+    ## NOTE: files got put under here after install local
+    C:\Users\<username>\.ralph\
+    C:\Users\<username>\.ralph\.claude\commands
 """
 
 import subprocess

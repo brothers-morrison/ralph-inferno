@@ -154,6 +154,11 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 # =============================================================================
+# LOAD LIBRARIES
+# =============================================================================
+source "$RALPH_DIR/lib/llm.sh"
+
+# =============================================================================
 # HJÄLPFUNKTIONER
 # =============================================================================
 log() {
@@ -712,14 +717,29 @@ log_progress() {
 EOF
 
     # Be Claude logga sina learnings
-    echo "Du har just avslutat iteration $iteration av $spec_name.
+    python3 -c "
+import os
+import sys
+sys.path.insert(0, '../core')
+from llm_client import call_llm_with_timeout_handling
+api_key = os.getenv('OPENROUTER_API_KEY')
+if api_key:
+    model = os.getenv('LLM_MODEL', 'anthropic/claude-3.5-sonnet')
+    prompt = '''
+    
+Du har just avslutat iteration $iteration av $spec_name.
 Skriv 2-3 korta punkter om:
 1. Vad implementerades
 2. Eventuella gotchas eller patterns du upptäckte
 3. Filer som ändrades
 
-Svara ENDAST med punkterna, inget annat." | \
-        timeout 60 claude --dangerously-skip-permissions 2>/dev/null >> "$PROGRESS_FILE" || true
+Svara ENDAST med punkterna, inget annat.'''
+
+    messages = [{'role': 'user', 'content': prompt}]
+    result = call_llm_with_timeout_handling(api_key, model, messages, timeout=60)
+    if result and 'choices' in result:
+        print(result['choices'][0]['message']['content'])
+" 2>/dev/null >> "$PROGRESS_FILE" || true
 
     log "${CYAN}Progress loggad till $PROGRESS_FILE${NC}"
 }
@@ -1007,7 +1027,26 @@ När klar: skriv <promise>DONE</promise>
 Innan DONE: kör 'npm run build' och verifiera att det passerar."
 
             log "${CYAN}Startar ny session...${NC}"
-            output=$(echo "$full_prompt" | timeout $TIMEOUT claude --session-id "$session_id" --dangerously-skip-permissions -p 2>&1) || exit_code=$?
+            output=$(python3 -c "
+import os
+import sys
+sys.path.insert(0, '../core')
+from llm_client import call_llm_with_timeout_handling
+api_key = os.getenv('OPENROUTER_API_KEY')
+if not api_key:
+    print('OPENROUTER_API_KEY not set', file=sys.stderr)
+    sys.exit(1)
+model = os.getenv('LLM_MODEL', 'anthropic/claude-3.5-sonnet')
+prompt = sys.stdin.read().strip()
+messages = [{'role': 'user', 'content': prompt}]
+result = call_llm_with_timeout_handling(api_key, model, messages, timeout=$TIMEOUT)
+if result and 'choices' in result:
+    print(result['choices'][0]['message']['content'])
+    sys.exit(0)
+else:
+    print('Timeout or error', file=sys.stderr)
+    sys.exit(124)
+" < <(echo "$full_prompt") 2>&1) || exit_code=$?
 
         else
             # RETRY: Resume session med bara felinformation (sparar tokens!)
@@ -1019,7 +1058,26 @@ Fixa felen ovan. Kör 'npm run build' för att verifiera.
 Skriv <promise>DONE</promise> när bygget går igenom."
 
             log "${CYAN}Resumar session (sparar tokens)...${NC}"
-            output=$(echo "$retry_prompt" | timeout $TIMEOUT claude --resume "$session_id" --dangerously-skip-permissions -p 2>&1) || exit_code=$?
+            output=$(python3 -c "
+import os
+import sys
+sys.path.insert(0, '../core')
+from llm_client import call_llm_with_timeout_handling
+api_key = os.getenv('OPENROUTER_API_KEY')
+if not api_key:
+    print('OPENROUTER_API_KEY not set', file=sys.stderr)
+    sys.exit(1)
+model = os.getenv('LLM_MODEL', 'anthropic/claude-3.5-sonnet')
+prompt = sys.stdin.read().strip()
+messages = [{'role': 'user', 'content': prompt}]
+result = call_llm_with_timeout_handling(api_key, model, messages, timeout=$TIMEOUT)
+if result and 'choices' in result:
+    print(result['choices'][0]['message']['content'])
+    sys.exit(0)
+else:
+    print('Timeout or error', file=sys.stderr)
+    sys.exit(124)
+" < <(echo "$retry_prompt") 2>&1) || exit_code=$?
         fi
 
         echo "$output"
@@ -1872,7 +1930,24 @@ Analysera felet och fixa det. Kör sedan 'npm run build' för att verifiera.
 När build passerar, skriv: <promise>DONE</promise>"
 
         local fix_output
-        fix_output=$(echo "$fix_prompt" | timeout $TIMEOUT claude --dangerously-skip-permissions -p 2>&1) || true
+        fix_output=$(python3 -c "
+import os
+import sys
+sys.path.insert(0, '../core')
+from llm_client import call_llm_with_timeout_handling
+api_key = os.getenv('OPENROUTER_API_KEY')
+if not api_key:
+    print('OPENROUTER_API_KEY not set', file=sys.stderr)
+    sys.exit(1)
+model = os.getenv('LLM_MODEL', 'anthropic/claude-3.5-sonnet')
+prompt = sys.stdin.read().strip()
+messages = [{'role': 'user', 'content': prompt}]
+result = call_llm_with_timeout_handling(api_key, model, messages, timeout=$TIMEOUT)
+if result and 'choices' in result:
+    print(result['choices'][0]['message']['content'])
+else:
+    print('Error')
+" < <(echo "$fix_prompt") 2>&1) || true
 
         echo "$fix_output"
 
