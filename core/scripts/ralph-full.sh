@@ -717,29 +717,28 @@ log_progress() {
 EOF
 
     # Be Claude logga sina learnings
-    python3 -c "
-import os
-import sys
-sys.path.insert(0, '../core')
-from llm_client import call_llm_with_timeout_handling
-api_key = os.getenv('OPENROUTER_API_KEY')
-if api_key:
-    model = os.getenv('LLM_MODEL', 'anthropic/claude-3.5-sonnet')
-    prompt = '''
-    
+    fin_prompt = '''   
 Du har just avslutat iteration $iteration av $spec_name.
 Skriv 2-3 korta punkter om:
 1. Vad implementerades
 2. Eventuella gotchas eller patterns du upptäckte
 3. Filer som ändrades
 
-Svara ENDAST med punkterna, inget annat.'''
+Svara ENDAST med punkterna, inget annat.
+'''
 
-    messages = [{'role': 'user', 'content': prompt}]
-    result = call_llm_with_timeout_handling(api_key, model, messages, timeout=60)
-    if result and 'choices' in result:
-        print(result['choices'][0]['message']['content'])
-" 2>/dev/null >> "$PROGRESS_FILE" || true
+en_prompt = '''
+You have just completed iteration $iteration of $spec_name. 
+
+# Write 2-3 short points about:
+1. What was implemented
+2. Any gotchas or patterns you discovered
+3. Files that changed
+
+Answer ONLY with the points, nothing else.
+'''
+output=$(llm_query "$prompt" 2>/dev/null)
+$output >> "$PROGRESS_FILE" || exit_code=$?
 
     log "${CYAN}Progress loggad till $PROGRESS_FILE${NC}"
 }

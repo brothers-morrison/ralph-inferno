@@ -182,26 +182,7 @@ run_spec() {
 When complete: write $COMPLETION_MARKER
 Before DONE: run 'npm run build' and verify it passes."
 
-        output=$(python3 -c "
-import os
-import sys
-sys.path.insert(0, '..')
-from llm_client import call_llm_with_timeout_handling
-api_key = os.getenv('OPENROUTER_API_KEY')
-if not api_key:
-    print('OPENROUTER_API_KEY not set', file=sys.stderr)
-    sys.exit(1)
-model = os.getenv('LLM_MODEL', 'anthropic/claude-3.5-sonnet')
-prompt = sys.stdin.read().strip()
-messages = [{'role': 'user', 'content': prompt}]
-result = call_llm_with_timeout_handling(api_key, model, messages, timeout=$TIMEOUT)
-if result and 'choices' in result:
-    print(result['choices'][0]['message']['content'])
-    sys.exit(0)
-else:
-    print('Timeout or error', file=sys.stderr)
-    sys.exit(124)
-" < <(echo "$prompt") 2>&1) || exit_code=$?
+        output=$(llm_query "$prompt" 2>&1) || exit_code=$?
 
         # Log output to file (always)
         log_claude_output "$spec_name" "$output" "$exit_code"
